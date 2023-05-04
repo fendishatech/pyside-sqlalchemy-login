@@ -15,26 +15,44 @@ def test_repository ():
     # Get table information.
 
     # Register user.
-    # register_user("test1", "12345")
+    register_user("test1", "12345")
 
     # Find user by username.
     user = find_user("test1")
+    if user :
+        print(f"Username => {user.username}")
+    else :
+        print("User not found")
+
+    # Login test
+    login_result = login("test1", "12345")
+    print("Login successful:", login_result)
 
     # Update password.
     user = find_user("test1")
-    update_password(user,"test1")
+    if user :
+        update_password(user,"12345", "test1")
+    else:
+        print("User to update is not found")
 
-    # Delete user.
-    user = find_user("test1")
-    update_password(user,"test1")
-
-    # Login test
-    login_result = login("test", "12345")
+    login_result = login("test1", "12345")
     print("Login successful:", login_result)
 
+    # Get all users.
     users = get_users()
-    for user in users :
-        print(f"Username : {user.username} && Password : {user.password}")
+    if users:
+        for user in users :
+            print(f"Username : {user.username} && Password : {user.password}")
+    else:
+        print("Users not found")
+    
+    # Delete user.
+    user = find_user("test1")
+    if user :
+        delete_user(user)
+    else:
+        print("User to delete was not found")   
+
     
     logout()
 
